@@ -340,6 +340,134 @@
             color: #94a3b8;
             padding: 4px 8px;
         }
+        /* 适老化增强：放大报告、表单和关键操作控件 */
+        body { font-size: 16px; }
+        button,
+        input,
+        select,
+        .option-card {
+            min-height: 46px;
+            font-size: 15px !important;
+            line-height: 1.45;
+        }
+        input,
+        select,
+        .admin-input {
+            min-height: 48px;
+            font-size: 16px !important;
+        }
+        label {
+            font-size: 16px !important;
+            line-height: 1.45;
+        }
+        .btn-primary,
+        button.btn-primary,
+        #prevBtn,
+        #nextBtn {
+            min-height: 50px;
+            font-size: 16px !important;
+            font-weight: 800;
+        }
+        .ai-disclaimer,
+        .report-disclaimer {
+            font-size: 14px;
+            line-height: 1.55;
+        }
+        .pill-tag {
+            min-height: 28px;
+            padding: 5px 12px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .ref-badge,
+        .wc-tag,
+        .wc-tag-line {
+            font-size: 13px;
+        }
+        .avatar-ring p {
+            font-size: 16px !important;
+            line-height: 1.35;
+        }
+        .step-dot {
+            width: 32px !important;
+            height: 32px !important;
+            font-size: 13px !important;
+        }
+        #diagnosisModal h3,
+        #resultModal h3 {
+            font-size: 24px !important;
+            line-height: 1.25;
+        }
+        #diagnosisModal h4 {
+            font-size: 20px !important;
+            line-height: 1.35;
+        }
+        #diagnosisModal p,
+        #diagnosisModal span {
+            font-size: 15px;
+        }
+        #resultModal .result-chip {
+            min-height: 36px;
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+        #resultModal .report-paper {
+            font-size: 16px;
+        }
+        #resultModal .report-section {
+            padding: 16px;
+        }
+        #resultModal h4 {
+            font-size: 28px !important;
+            line-height: 1.2;
+        }
+        #resultModal h5 {
+            font-size: 16px !important;
+            line-height: 1.35;
+        }
+        #resultModal #constitutionDesc,
+        #resultModal #analysisText,
+        #resultModal #wuxingDesc,
+        #resultModal #constitutionFeatures,
+        #resultModal #sleepAdvice,
+        #resultModal #treatmentPlan,
+        #resultModal #productRecommendations {
+            font-size: 15.5px !important;
+            line-height: 1.75;
+        }
+        #resultModal #productRecommendations .text-base {
+            font-size: 17px !important;
+        }
+        #resultModal #productRecommendations .text-sm {
+            font-size: 14px !important;
+        }
+        #resultModal .wuxing-bar {
+            height: 8px;
+        }
+        #resultModal .wx-dot {
+            width: 10px;
+            height: 10px;
+        }
+        #resultModal [id^="wx-"][id$="-val"],
+        #resultModal #wuxingChart span {
+            font-size: 14px !important;
+        }
+        #resultModal .px-5.py-4 button {
+            min-height: 52px;
+            font-size: 16px !important;
+        }
+        @media (max-width: 380px) {
+            #resultModal .grid.grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            #resultModal .grid.grid-cols-\[168px_1fr\] {
+                grid-template-columns: 1fr;
+            }
+            #resultModal .radial-report {
+                width: 150px;
+                height: 150px;
+            }
+        }
     </style>
     <style>
         /* ===== 科技感粒子/光效 ===== */
@@ -978,7 +1106,7 @@
                                 <div>
                                     <p class="text-[10px] text-slate-400 tracking-[0.2em] uppercase">TCM Data Reference</p>
                                     <h4 class="text-2xl font-black text-slate-950 mt-1" id="constitutionType">平和体质</h4>
-                                    <p class="text-xs text-slate-500 mt-1" id="constitutionDesc">体质较为平衡</p>
+                                    <p class="text-sm text-slate-500 mt-1" id="constitutionDesc">体质较为平衡</p>
                                 </div>
                                 <div id="resultAvatar" class="avatar-profile-frame w-20 h-28 rounded-[24px] border border-slate-200 flex items-center justify-center bg-slate-50"></div>
                             </div>
@@ -1029,7 +1157,7 @@
                                     <span class="w-7 h-7 rounded-full bg-slate-950 text-white flex items-center justify-center text-xs font-bold">01</span>
                                     <h5 class="text-sm font-black text-slate-900">数据解读</h5>
                                 </div>
-                                <p class="text-xs text-slate-600 leading-relaxed" id="analysisText">正在生成综合分析报告...</p>
+                                <p class="text-sm text-slate-600 leading-relaxed" id="analysisText">正在生成综合分析报告...</p>
                             </div>
 
                             <div class="report-section mb-4">
@@ -1069,23 +1197,23 @@
                                         <span class="text-xs text-slate-400 w-8 text-right" id="wx-shui-val">0%</span>
                                     </div>
                                 </div>
-                                <p class="text-[11px] text-slate-500 mt-3 leading-relaxed" id="wuxingDesc">根据您的填写信息，AI分析五行能量分布，仅作生活方式参考。</p>
+                                <p class="text-sm text-slate-500 mt-3 leading-relaxed" id="wuxingDesc">根据您的填写信息，AI分析五行能量分布，仅作生活方式参考。</p>
                             </div>
 
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div class="report-section">
                                     <h5 class="text-sm font-black text-slate-900 mb-2 flex items-center gap-2"><i class="ri-shield-star-line text-indigo-500"></i>体质分析</h5>
-                                    <ul class="space-y-1 text-xs text-slate-600 leading-relaxed" id="constitutionFeatures"></ul>
+                                    <ul class="space-y-1.5 text-sm text-slate-600 leading-relaxed" id="constitutionFeatures"></ul>
                                 </div>
                                 <div class="report-section">
                                     <h5 class="text-sm font-black text-slate-900 mb-2 flex items-center gap-2"><i class="ri-moon-line text-amber-500"></i>调理规划</h5>
-                                    <ul class="space-y-1 text-xs text-slate-600 leading-relaxed" id="sleepAdvice"></ul>
+                                    <ul class="space-y-1.5 text-sm text-slate-600 leading-relaxed" id="sleepAdvice"></ul>
                                 </div>
                             </div>
 
                             <div class="report-section mb-4">
                                 <h5 class="text-sm font-black text-slate-900 mb-2 flex items-center gap-2"><i class="ri-medicine-bottle-line text-emerald-500"></i>方案设计</h5>
-                                <ul class="space-y-1 text-xs text-slate-600 leading-relaxed" id="treatmentPlan"></ul>
+                                <ul class="space-y-1.5 text-sm text-slate-600 leading-relaxed" id="treatmentPlan"></ul>
                             </div>
 
                             <div class="report-section">

@@ -21,6 +21,9 @@ let diagnosisData = {
 var DEFAULT_CFG={'\u5e73\u548c\u4f53\u8d28':{sleepAdvice:['\u4fdd\u6301\u89c4\u5f8b\u4f5c\u606f\uff0c\u665a\u4e0a10-11\u70b9\u5165\u7761','\u7761\u524d\u907f\u514d\u4f7f\u7528\u7535\u5b50\u8bbe\u5907','\u521b\u9020\u5b89\u9759\u3001\u9ed1\u6697\u3001\u51c9\u723d\u7684\u7761\u7720\u73af\u5883','\u9002\u5f53\u5348\u4f11\uff0c\u4f46\u4e0d\u8d85\u8fc730\u5206\u949f'],treatmentPlan:['\u4fdd\u6301\u73b0\u6709\u826f\u597d\u751f\u6d3b\u4e60\u60ef','\u9002\u5f53\u8fd0\u52a8\uff0c\u5982\u6563\u6b65\u3001\u592a\u6781\u62f3','\u996e\u98df\u6e05\u6de1\uff0c\u8425\u517b\u5747\u8861','\u5b9a\u671f\u4f53\u68c0\uff0c\u9884\u9632\u75be\u75c5'],products:[{name:'\u5b89\u795e\u52a9\u7720\u8336',desc:'\u767e\u5408\u83b2\u5b50\u914d\u65b9\uff0c\u5b81\u5fc3\u5b89\u795e',price:'\u00a5128',img:'ri-cup-line'}]},'\u9634\u865a\u4f53\u8d28':{sleepAdvice:['\u6ecb\u9634\u5b89\u795e\uff0c\u665a\u4e0a9-10\u70b9\u5165\u7761','\u7761\u524d\u559d\u4e00\u676f\u6e29\u725b\u5976\u6216\u67b8\u675e\u8336','\u907f\u514d\u71ac\u591c\uff0c\u517b\u9634\u5b89\u795e','\u53ef\u7528\u767e\u5408\u3001\u83b2\u5b50\u716e\u7ca5\u52a9\u7720'],treatmentPlan:['\u6ecb\u9634\u6da6\u71e5\uff0c\u591a\u5403\u68a8\u3001\u767e\u5408\u3001\u94f6\u8033','\u907f\u514d\u8f9b\u8fa3\u71e5\u70ed\u98df\u7269','\u7ec3\u4e60\u7491\u4f3d\u3001\u51a5\u60f3\u7b49\u9759\u5fc3\u8fd0\u52a8','\u5982\u9700\u4e2d\u6210\u836f\u8c03\u7406\uff0c\u8bf7\u5148\u54a8\u8be2\u4e13\u4e1a\u533b\u5e08'],products:[{name:'\u6ecb\u9634\u6da6\u71e5\u818f',desc:'\u516d\u5473\u5730\u9ec4\u914d\u65b9\uff0c\u6ecb\u9634\u964d\u706b',price:'\u00a5198',img:'ri-medicine-bottle-line'}]},'\u6c14\u865a\u4f53\u8d28':{sleepAdvice:['\u8865\u6c14\u517b\u8840\uff0c\u4fdd\u8bc1\u5145\u8db3\u7761\u7720','\u7761\u524d\u907f\u514d\u8fc7\u5ea6\u601d\u8651','\u53ef\u9002\u5f53\u6309\u6469\u8db3\u4e09\u91cc\u7a74','\u7528\u7ea2\u67a3\u3001\u6842\u5706\u716e\u6c34\u559d'],treatmentPlan:['\u8865\u6c14\u5065\u813e\uff0c\u591a\u5403\u5c71\u836f\u3001\u7ea2\u67a3\u3001\u9ec4\u8302','\u907f\u514d\u8fc7\u5ea6\u52b3\u7d2f','\u7ec3\u4e60\u516b\u6bb5\u9526\u3001\u6c14\u529f\u7b49','\u5982\u9700\u4e2d\u6210\u836f\u8c03\u7406\uff0c\u8bf7\u5148\u54a8\u8be2\u4e13\u4e1a\u533b\u5e08'],products:[{name:'\u8865\u6c14\u517b\u8840\u8336',desc:'\u9ec4\u8302\u5f53\u5f52\u914d\u65b9\uff0c\u76ca\u6c14\u751f\u8840',price:'\u00a5158',img:'ri-cup-line'}]},'\u75f0\u6e7f\u4f53\u8d28':{sleepAdvice:['\u5065\u813e\u795b\u6e7f\uff0c\u907f\u514d\u7761\u524d\u8fc7\u9971','\u665a\u9910\u5b9c\u6e05\u6de1\uff0c\u7761\u524d3\u5c0f\u65f6\u4e0d\u8fdb\u98df','\u53ef\u9002\u5f53\u8fd0\u52a8\u4fc3\u8fdb\u6e7f\u6c14\u6392\u51fa','\u7528\u9648\u76ae\u3001\u832f\u82d3\u6ce1\u6c34\u559d'],treatmentPlan:['\u5065\u813e\u795b\u6e7f\uff0c\u591a\u5403\u858f\u7c73\u3001\u8d64\u5c0f\u8c46','\u907f\u514d\u80a5\u7518\u539a\u5473\u98df\u7269','\u589e\u52a0\u6709\u6c27\u8fd0\u52a8\uff0c\u5982\u5feb\u8d70\u3001\u6e38\u6cf3','\u5982\u9700\u4e2d\u6210\u836f\u8c03\u7406\uff0c\u8bf7\u5148\u54a8\u8be2\u4e13\u4e1a\u533b\u5e08'],products:[{name:'\u5065\u813e\u795b\u6e7f\u4e38',desc:'\u4e8c\u9648\u6c64\u914d\u65b9\uff0c\u5316\u75f0\u795b\u6e7f',price:'\u00a5168',img:'ri-medicine-bottle-line'}]}};
 function getConfig(){try{var s=localStorage.getItem('lh_cfg');if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(DEFAULT_CFG))}
 function saveConfig(cfg){localStorage.setItem('lh_cfg',JSON.stringify(cfg))}
+var FIXED_RECOMMENDED_PRODUCTS = [
+    { name: '好梦天始睡眠乳膏套盒+负氧离子睡眠仪', desc: '组合参考', img: 'ri-moon-clear-line' }
+];
 function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function(ch) {
         return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
@@ -397,14 +400,13 @@ function displayResults(result) {
     document.getElementById('treatmentPlan').innerHTML = result.treatmentPlan.map(function(f){return '<li class="flex items-start gap-2"><i class="ri-leaf-line text-emerald-500 mt-0.5 text-xs"></i><span>'+escapeHtml(f)+'</span></li>'}).join('');
 
     // 推荐产品
-    var cfg = getConfig();
-    var products = (cfg[result.type] && cfg[result.type].products) || [];
+    var products = FIXED_RECOMMENDED_PRODUCTS;
     var prodHtml = '';
     if (products.length === 0) {
-        prodHtml = '<p class="text-xs text-slate-400">暂无推荐产品</p>';
+        prodHtml = '<p class="text-sm text-slate-400">暂无推荐产品</p>';
     } else {
         products.forEach(function(p){
-            prodHtml += '<div class="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-100"><div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center"><i class="'+escapeHtml(p.img || 'ri-medicine-bottle-line')+' text-indigo-500"></i></div><div class="flex-1"><div class="text-sm font-bold text-slate-900">'+escapeHtml(p.name)+'</div><div class="text-[10px] text-slate-400">'+escapeHtml(p.desc)+'</div></div><div class="text-sm font-black text-amber-500">'+escapeHtml(p.price)+'</div></div>';
+            prodHtml += '<div class="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-100"><div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center"><i class="'+escapeHtml(p.img || 'ri-medicine-bottle-line')+' text-indigo-500"></i></div><div class="flex-1"><div class="text-base font-bold text-slate-900">'+escapeHtml(p.name)+'</div><div class="text-sm text-slate-400">'+escapeHtml(p.desc)+'</div></div></div>';
         });
     }
     document.getElementById('productRecommendations').innerHTML = prodHtml;
