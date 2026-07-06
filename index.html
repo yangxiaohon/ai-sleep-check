@@ -415,14 +415,14 @@
             font-size: 16px;
         }
         #resultModal .report-section {
-            padding: 16px;
+            padding: 18px;
         }
         #resultModal h4 {
-            font-size: 28px !important;
+            font-size: 32px !important;
             line-height: 1.2;
         }
         #resultModal h5 {
-            font-size: 16px !important;
+            font-size: 18px !important;
             line-height: 1.35;
         }
         #resultModal #constitutionDesc,
@@ -432,25 +432,56 @@
         #resultModal #sleepAdvice,
         #resultModal #treatmentPlan,
         #resultModal #productRecommendations {
-            font-size: 15.5px !important;
+            font-size: 17px !important;
             line-height: 1.75;
         }
-        #resultModal #productRecommendations .text-base {
+        #resultModal #analysisText {
+            font-size: 18px !important;
+            line-height: 1.85;
+            font-weight: 600;
+        }
+        #resultModal #constitutionDesc {
             font-size: 17px !important;
         }
+        #resultModal #healthScore,
+        #resultModal #sleepScore {
+            font-size: 52px !important;
+            line-height: 1;
+        }
+        #resultModal .report-section p {
+            font-size: 16px !important;
+        }
+        #resultModal #resultAge,
+        #resultModal #resultHeight,
+        #resultModal #resultWeight,
+        #resultModal #resultInsomnia {
+            font-size: 15px !important;
+            min-height: 34px;
+        }
+        #resultModal .radial-report {
+            width: 178px;
+            height: 178px;
+        }
+        #resultModal .radial-report .text-xl {
+            font-size: 28px !important;
+        }
+        #resultModal #productRecommendations .text-base {
+            font-size: 19px !important;
+        }
         #resultModal #productRecommendations .text-sm {
-            font-size: 14px !important;
+            font-size: 16px !important;
         }
         #resultModal .wuxing-bar {
-            height: 8px;
+            height: 12px;
         }
         #resultModal .wx-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
         }
         #resultModal [id^="wx-"][id$="-val"],
         #resultModal #wuxingChart span {
-            font-size: 14px !important;
+            font-size: 16px !important;
+            font-weight: 700;
         }
         #resultModal .px-5.py-4 button {
             min-height: 52px;
@@ -718,11 +749,11 @@
             <div class="grid grid-cols-4 gap-3 mb-6">
                 <div class="text-center cursor-pointer" onclick="openDiagnosisModal()">
                     <div class="w-12 h-12 mx-auto rounded-2xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center mb-1.5 hover:bg-[#6366f1]/20 transition-colors"><i class="ri-eye-line text-[#818cf8]"></i></div>
-                    <p class="text-[10px] text-white/60">望诊</p>
+                    <p class="text-[10px] text-white/60">面部</p>
                 </div>
                 <div class="text-center cursor-pointer" onclick="openDiagnosisModal()">
                     <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-1.5 hover:bg-emerald-500/20 transition-colors"><i class="ri-volume-up-line text-[#34d399]"></i></div>
-                    <p class="text-[10px] text-white/60">闻诊</p>
+                    <p class="text-[10px] text-white/60">声音</p>
                 </div>
                 <div class="text-center cursor-pointer" onclick="openDiagnosisModal()">
                     <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-1.5 hover:bg-amber-500/20 transition-colors"><i class="ri-question-answer-line text-[#fbbf24]"></i></div>
@@ -730,7 +761,7 @@
                 </div>
                 <div class="text-center cursor-pointer" onclick="openDiagnosisModal()">
                     <div class="w-12 h-12 mx-auto rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mb-1.5 hover:bg-rose-500/20 transition-colors"><i class="ri-hand-heart-line text-[#f87171]"></i></div>
-                    <p class="text-[10px] text-white/60">切诊</p>
+                    <p class="text-[10px] text-white/60">状态</p>
                 </div>
             </div>
 
@@ -1077,7 +1108,7 @@
                         <div>
                             <p class="text-[10px] text-indigo-200/60 tracking-[0.22em] uppercase">Linghu AI Reference</p>
                             <h3 class="text-2xl font-black tracking-tight mt-1">数据参考结果</h3>
-                            <p class="text-xs text-white/45 mt-1">体质倾向 · 调养参考 · 舌面数据解读</p>
+                            <p class="text-xs text-white/45 mt-1">状态倾向 · 调养参考 · 舌面数据解读</p>
                         </div>
                         <button onclick="closeResultModal()" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10"><i class="ri-close-line text-white/60"></i></button>
                     </div>
@@ -1088,11 +1119,11 @@
                     <div class="grid grid-cols-3 gap-2">
                         <span class="result-chip">数据结果</span>
                         <span class="result-chip">方案设计</span>
-                        <span class="result-chip">体质分析</span>
+                        <span class="result-chip">状态分析</span>
                         <span class="result-chip">调理规划</span>
-                        <span class="result-chip">望诊参考</span>
+                        <span class="result-chip">面部特征</span>
                         <span class="result-chip">草本建议</span>
-                        <span class="result-chip">舌诊分析</span>
+                        <span class="result-chip">舌面特征</span>
                         <span class="result-chip">穴位参考</span>
                         <span class="result-chip">生活建议</span>
                     </div>
@@ -1104,9 +1135,9 @@
                         <div class="relative z-10">
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div>
-                                    <p class="text-[10px] text-slate-400 tracking-[0.2em] uppercase">TCM Data Reference</p>
-                                    <h4 class="text-2xl font-black text-slate-950 mt-1" id="constitutionType">平和体质</h4>
-                                    <p class="text-sm text-slate-500 mt-1" id="constitutionDesc">体质较为平衡</p>
+                                    <p class="text-[10px] text-slate-400 tracking-[0.2em] uppercase">AI Data Reference</p>
+                                    <h4 class="text-2xl font-black text-slate-950 mt-1" id="constitutionType">平衡型</h4>
+                                    <p class="text-sm text-slate-500 mt-1" id="constitutionDesc">整体状态较为平衡</p>
                                 </div>
                                 <div id="resultAvatar" class="avatar-profile-frame w-20 h-28 rounded-[24px] border border-slate-200 flex items-center justify-center bg-slate-50"></div>
                             </div>
@@ -1125,7 +1156,7 @@
                             <div class="grid grid-cols-[168px_1fr] gap-4 items-center mb-4">
                                 <div class="radial-report mx-auto flex items-center justify-center">
                                     <div class="text-center relative z-10">
-                                        <div class="text-[10px] text-slate-400">体质</div>
+                                        <div class="text-[10px] text-slate-400">状态</div>
                                         <div class="text-xl font-black text-slate-900">AI</div>
                                         <div class="text-[10px] text-slate-400">解析</div>
                                     </div>
@@ -1162,8 +1193,8 @@
 
                             <div class="report-section mb-4">
                                 <div class="flex items-center justify-between mb-3">
-                                    <h5 class="text-sm font-black text-slate-900 flex items-center gap-2"><i class="ri-yin-yang-line text-amber-500"></i>五行能量分布</h5>
-                                    <span class="text-[10px] px-2 py-1 rounded-full bg-slate-100 text-slate-500">TCM MATRIX</span>
+                                    <h5 class="text-sm font-black text-slate-900 flex items-center gap-2"><i class="ri-bubble-chart-line text-amber-500"></i>状态能量分布</h5>
+                                    <span class="text-[10px] px-2 py-1 rounded-full bg-slate-100 text-slate-500">AI MATRIX</span>
                                 </div>
                                 <div class="space-y-2.5" id="wuxingChart">
                                     <div class="flex items-center gap-3">
@@ -1197,12 +1228,12 @@
                                         <span class="text-xs text-slate-400 w-8 text-right" id="wx-shui-val">0%</span>
                                     </div>
                                 </div>
-                                <p class="text-sm text-slate-500 mt-3 leading-relaxed" id="wuxingDesc">根据您的填写信息，AI分析五行能量分布，仅作生活方式参考。</p>
+                                <p class="text-sm text-slate-500 mt-3 leading-relaxed" id="wuxingDesc">根据您的填写信息，AI分析状态能量分布，仅作生活方式参考。</p>
                             </div>
 
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div class="report-section">
-                                    <h5 class="text-sm font-black text-slate-900 mb-2 flex items-center gap-2"><i class="ri-shield-star-line text-indigo-500"></i>体质分析</h5>
+                                    <h5 class="text-sm font-black text-slate-900 mb-2 flex items-center gap-2"><i class="ri-shield-star-line text-indigo-500"></i>状态分析</h5>
                                     <ul class="space-y-1.5 text-sm text-slate-600 leading-relaxed" id="constitutionFeatures"></ul>
                                 </div>
                                 <div class="report-section">
@@ -1245,12 +1276,12 @@
                 </div>
                 <div class="flex-1 overflow-y-auto scroll-hide px-6 py-4 space-y-4">
                     <div class="admin-panel p-4">
-                        <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="ri-user-heart-line text-[#818cf8]"></i>体质选择</h4>
+                        <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="ri-user-heart-line text-[#818cf8]"></i>状态类型选择</h4>
                         <select id="adminConstitution" onchange="loadAdminConfig()" class="admin-input mb-3">
-                            <option value="平和体质">平和体质</option>
-                            <option value="阴虚体质">阴虚体质</option>
-                            <option value="气虚体质">气虚体质</option>
-                            <option value="痰湿体质">痰湿体质</option>
+                            <option value="平和体质">平衡型</option>
+                            <option value="阴虚体质">偏热型</option>
+                            <option value="气虚体质">偏弱型</option>
+                            <option value="痰湿体质">偏重型</option>
                         </select>
                     </div>
                     <div class="admin-panel p-4">

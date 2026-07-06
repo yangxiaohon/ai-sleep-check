@@ -24,6 +24,27 @@ function saveConfig(cfg){localStorage.setItem('lh_cfg',JSON.stringify(cfg))}
 var FIXED_RECOMMENDED_PRODUCTS = [
     { name: '好梦天始睡眠乳膏套盒+负氧离子睡眠仪', desc: '组合参考', img: 'ri-moon-clear-line' }
 ];
+var SAFE_RESULT_LABELS = {
+    '平和体质': { name: '平衡型', desc: '整体状态较为平衡，建议继续保持稳定作息。' },
+    '阴虚体质': { name: '偏热型', desc: '夜间烦躁与睡眠波动倾向较明显，建议重点关注放松与作息节律。' },
+    '气虚体质': { name: '偏弱型', desc: '精力恢复与睡眠稳定性偏弱，建议关注饮食节律与低强度活动。' },
+    '痰湿体质': { name: '偏重型', desc: '饮食与作息负担偏重，建议关注清淡饮食和规律运动。' }
+};
+var SAFE_SLEEP_ADVICE = {
+    '平和体质': ['保持固定上床和起床时间', '睡前30分钟减少手机和短视频刺激', '卧室保持安静、遮光、温度舒适', '午休控制在30分钟以内'],
+    '阴虚体质': ['睡前安排10分钟呼吸放松', '晚间减少辛辣、浓茶、咖啡等刺激', '固定睡前流程，让身体形成入睡提示', '睡前可做轻柔拉伸或冥想'],
+    '气虚体质': ['白天安排低强度散步，避免过度劳累', '晚餐不过饱，保持饮食节律', '午后减少长时间补觉', '睡前减少思虑型活动'],
+    '痰湿体质': ['晚餐清淡，睡前3小时尽量不进食', '每天保持轻出汗活动', '减少久坐，饭后可慢走', '卧室保持通风干爽']
+};
+var SAFE_TREATMENT_PLAN = {
+    '平和体质': ['继续保持稳定作息和均衡饮食', '每周保持3次以上轻运动', '定期记录睡眠变化', '如有不适请线下就医'],
+    '阴虚体质': ['重点建立睡前放松流程', '减少熬夜和夜间高刺激内容', '饮食以清淡、温和为主', '如有不适请线下就医'],
+    '气虚体质': ['关注白天精力恢复和活动节律', '运动选择散步、舒缓拉伸等低强度方式', '保持三餐规律，避免过度节食', '如有不适请线下就医'],
+    '痰湿体质': ['减少油腻和夜宵频率', '增加规律步行或轻有氧活动', '控制晚间饮食负担', '如有不适请线下就医']
+};
+function getSafeResult(type) {
+    return SAFE_RESULT_LABELS[type] || SAFE_RESULT_LABELS['平和体质'];
+}
 function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function(ch) {
         return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
@@ -60,11 +81,11 @@ function initializeAvatarCards() {
 
 // Wu Xing (Five Elements) profiles per constitution type
 const wuxingProfiles = {
-    '平和体质': { mu: 70, huo: 70, tu: 70, jin: 70, shui: 70, desc: '五行调和，整体状态较为平衡。' },
-    '阳虚体质': { mu: 45, huo: 35, tu: 50, jin: 55, shui: 75, desc: '阳气不足，水旺火弱，表现为畏寒乏力。' },
-    '阴虚体质': { mu: 60, huo: 85, tu: 50, jin: 45, shui: 30, desc: '阴液不足，火旺水亏，表现为潮热盗汗。' },
-    '气虚体质': { mu: 40, huo: 55, tu: 40, jin: 50, shui: 55, desc: '脾肾气虚，能量不足，表现为疲劳气短。' },
-    '痰湿体质': { mu: 50, huo: 55, tu: 80, jin: 45, shui: 65, desc: '脾胃运化失司，痰湿内生，表现为身重体胖。' }
+    '平和体质': { mu: 70, huo: 70, tu: 70, jin: 70, shui: 70, desc: '整体分布较均衡，状态稳定度较好。' },
+    '阳虚体质': { mu: 45, huo: 35, tu: 50, jin: 55, shui: 75, desc: '恢复能量偏低，夜间保暖与作息稳定可重点关注。' },
+    '阴虚体质': { mu: 60, huo: 85, tu: 50, jin: 45, shui: 30, desc: '夜间活跃度偏高，建议关注放松训练与入睡节律。' },
+    '气虚体质': { mu: 40, huo: 55, tu: 40, jin: 50, shui: 55, desc: '精力恢复偏弱，建议关注白天活动量与营养节律。' },
+    '痰湿体质': { mu: 50, huo: 55, tu: 80, jin: 45, shui: 65, desc: '日常负担指数偏高，建议关注清淡饮食与规律运动。' }
 };
 
 function renderWuxing(type) {
@@ -305,16 +326,16 @@ function analyzeConstitution(data) {
     const { questionnaire } = data;
     let score = 0;
     let constitution = '平和体质';
-    let description = '体质较为平衡，保持良好生活习惯';
+    let description = '整体状态较为平衡，保持良好生活习惯';
 
     if (questionnaire.sleep === 'poor' || questionnaire.sleep === 'very_poor') score += 3;
     if (questionnaire.energy === 'low' || questionnaire.energy === 'very_low') score += 2;
     if (questionnaire.diet === 'greasy') score += 2;
     if (questionnaire.exercise === 'rarely' || questionnaire.exercise === 'never') score += 1;
 
-    if (score >= 6) { constitution = '阴虚体质'; description = '阴液不足，容易失眠多梦，需要滋阴养血'; }
-    else if (score >= 4) { constitution = '气虚体质'; description = '气血不足，容易疲劳，需要补气养血'; }
-    else if (score >= 2) { constitution = '痰湿体质'; description = '体内湿气较重，需要健脾祛湿'; }
+    if (score >= 6) { constitution = '阴虚体质'; description = '夜间活跃度偏高，睡眠连续性容易波动'; }
+    else if (score >= 4) { constitution = '气虚体质'; description = '精力恢复偏弱，容易疲劳'; }
+    else if (score >= 2) { constitution = '痰湿体质'; description = '日常负担指数偏高，需要关注饮食与活动节律'; }
 
     return {
         type: constitution,
@@ -327,26 +348,20 @@ function analyzeConstitution(data) {
 
 function getConstitutionFeatures(type) {
     const features = {
-        '平和体质': ['面色红润，精力充沛','睡眠质量良好，食欲正常','大小便正常，舌苔薄白','情绪稳定，适应能力强'],
-        '阴虚体质': ['形体消瘦，口燥咽干','手足心热，盗汗失眠','舌红少苔，脉细数','性情急躁，外向好动'],
-        '气虚体质': ['面色苍白，气短懒言','容易出汗，易感冒','舌淡红，脉虚缓','精神不振，疲乏无力'],
-        '痰湿体质': ['形体肥胖，腹部肥满','胸闷痰多，身重困倦','舌体胖大，苔白腻','喜食肥甘，性情温和']
+        '平和体质': ['面部状态自然，精神状态较稳定','睡眠质量较好，日常节律较规律','舌面颜色与覆盖状态较均衡','情绪稳定，适应能力较好'],
+        '阴虚体质': ['夜间活跃度偏高，容易出现入睡波动','睡前放松不足时，睡眠连续性容易下降','舌面颜色偏红，覆盖较少','情绪较敏感，建议减少睡前刺激'],
+        '气虚体质': ['白天精力恢复偏弱，容易疲劳','活动量不足时，睡眠稳定性容易波动','舌面颜色偏淡，整体状态偏弱','建议保持轻运动与规律饮食'],
+        '痰湿体质': ['饮食与作息负担指数偏高','久坐或晚餐偏重时，夜间舒适度容易下降','舌面覆盖感偏重，需关注清淡节律','建议增加低强度有氧活动']
     };
     return features[type] || features['平和体质'];
 }
 
 function getSleepAdvice(type) {
-    var cfg = getConfig();
-    if (cfg[type] && cfg[type].sleepAdvice) return cfg[type].sleepAdvice;
-    var d = DEFAULT_CFG[type];
-    return d ? d.sleepAdvice : DEFAULT_CFG['\u5e73\u548c\u4f53\u8d28'].sleepAdvice;
+    return SAFE_SLEEP_ADVICE[type] || SAFE_SLEEP_ADVICE['平和体质'];
 }
 
 function getTreatmentPlan(type) {
-    var cfg = getConfig();
-    if (cfg[type] && cfg[type].treatmentPlan) return cfg[type].treatmentPlan;
-    var d = DEFAULT_CFG[type];
-    return d ? d.treatmentPlan : DEFAULT_CFG['\u5e73\u548c\u4f53\u8d28'].treatmentPlan;
+    return SAFE_TREATMENT_PLAN[type] || SAFE_TREATMENT_PLAN['平和体质'];
 }
 
 function displayResults(result) {
@@ -380,20 +395,21 @@ function displayResults(result) {
     document.getElementById('healthScore').textContent = healthScore;
     document.getElementById('sleepScore').textContent = sleepScore;
 
+    var safeResult = getSafeResult(result.type);
     var analysisParts = [];
-    analysisParts.push('基于AI多维度数据模型，结合您填写的信息生成参考结果。');
-    if (result.type === '平和体质') analysisParts.push('您的体质状态良好，五行能量分布均衡，状态较为协调。建议继续保持现有健康生活方式，定期关注身体状态。');
-    else if (result.type === '阴虚体质') analysisParts.push('您的体质偏阴虚，阴液不足导致虚火上炎，影响睡眠质量。此类体质在失眠人群中占比较高，可重点关注作息、饮食与放松训练。');
-    else if (result.type === '气虚体质') analysisParts.push('您的体质偏气虚，气血生化不足，状态偏弱。气虚体质者睡眠质量波动较明显，可重点关注作息、饮食与低强度运动。');
-    else if (result.type === '痰湿体质') analysisParts.push('您的体质偏痰湿，饮食与作息状态可能偏重负担。痰湿体质与睡眠质量密切相关，可重点关注清淡饮食与规律运动。');
+    analysisParts.push('基于AI多维度样本特征模型，结合睡眠问卷、面部照片、舌面照片和日常习惯信息生成参考结果。');
+    if (result.type === '平和体质') analysisParts.push('您的状态分布较均衡，睡眠与日常节律整体稳定。建议继续保持现有生活方式，并定期关注变化。');
+    else if (result.type === '阴虚体质') analysisParts.push('您的夜间活跃度偏高，睡前放松不足时更容易影响入睡节律。可重点关注作息固定、睡前放松和饮食清淡。');
+    else if (result.type === '气虚体质') analysisParts.push('您的精力恢复指数偏弱，白天疲劳感与睡眠稳定性关联较明显。可重点关注规律饮食、轻运动和午后休息控制。');
+    else if (result.type === '痰湿体质') analysisParts.push('您的日常负担指数偏高，晚餐偏重、久坐或活动不足时更容易影响夜间舒适度。可重点关注清淡饮食与规律活动。');
     if (diagnosisData.insomniaDuration && diagnosisData.insomniaDuration !== 'none') {
         var durMap = {'1-3m':'短期','3-6m':'中期','6-12m':'中长期','1-2y':'长期','2-3y':'长期','3y+':'慢性'};
-        analysisParts.push('您已存在' + (durMap[diagnosisData.insomniaDuration]||'') + '失眠问题，可参考以下生活方式建议进行调整。');
+        analysisParts.push('您反馈的睡眠困扰属于' + (durMap[diagnosisData.insomniaDuration]||'') + '波动，可参考以下生活方式建议进行调整。');
     }
     document.getElementById('analysisText').textContent = analysisParts.join('');
 
-    document.getElementById('constitutionType').textContent = result.type;
-    document.getElementById('constitutionDesc').textContent = result.description;
+    document.getElementById('constitutionType').textContent = safeResult.name;
+    document.getElementById('constitutionDesc').textContent = safeResult.desc;
 
     document.getElementById('constitutionFeatures').innerHTML = result.features.map(function(f){return '<li class="flex items-start gap-2"><i class="ri-check-line text-indigo-500 mt-0.5 text-xs"></i><span>'+escapeHtml(f)+'</span></li>'}).join('');
     document.getElementById('sleepAdvice').innerHTML = result.sleepAdvice.map(function(f){return '<li class="flex items-start gap-2"><i class="ri-moon-line text-amber-500 mt-0.5 text-xs"></i><span>'+escapeHtml(f)+'</span></li>'}).join('');
@@ -426,7 +442,7 @@ function shareResults() {
     const sleep = Array.from(document.getElementById('sleepAdvice').children).map(li => li.textContent.trim());
     const plan = Array.from(document.getElementById('treatmentPlan').children).map(li => li.textContent.trim());
 
-    const shareText = `AI睡眠数据参考结果\n\n体质：${type}\n${desc}\n\n体质倾向：\n${features.join('\n')}\n\n睡眠建议：\n${sleep.join('\n')}\n\n综合建议：\n${plan.join('\n')}`;
+    const shareText = `AI睡眠数据参考结果\n\n状态类型：${type}\n${desc}\n\n状态倾向：\n${features.join('\n')}\n\n睡眠建议：\n${sleep.join('\n')}\n\n综合建议：\n${plan.join('\n')}`;
 
     if (navigator.share) {
         navigator.share({ title: 'AI睡眠数据参考结果', text: shareText }).catch(() => {});
@@ -472,7 +488,7 @@ function loadAdminConfig() {
     var ap = document.getElementById('adminProducts');
     ap.innerHTML = '';
     (data.products||[]).forEach(function(p, i){
-        ap.innerHTML += '<div class="flex gap-2 items-start bg-white/5 rounded-xl p-3"><div class="flex-1 space-y-2"><input class="admin-input" value="'+escapeHtml(p.name)+'" placeholder="产品名称" data-idx="'+i+'" data-pfield="name"><input class="admin-input" value="'+escapeHtml(p.desc)+'" placeholder="描述" data-idx="'+i+'" data-pfield="desc"><input class="admin-input" value="'+escapeHtml(p.price)+'" placeholder="价格" data-idx="'+i+'" data-pfield="price"></div><button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-300 text-xs px-2"><i class="ri-delete-bin-line"></i></button></div>';
+        ap.innerHTML += '<div class="flex gap-2 items-start bg-white/5 rounded-xl p-3"><div class="flex-1 space-y-2"><input class="admin-input" value="'+escapeHtml(p.name)+'" placeholder="产品名称" data-idx="'+i+'" data-pfield="name"><input class="admin-input" value="'+escapeHtml(p.desc)+'" placeholder="描述" data-idx="'+i+'" data-pfield="desc"></div><button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-300 text-xs px-2"><i class="ri-delete-bin-line"></i></button></div>';
     });
 }
 
@@ -485,7 +501,7 @@ function addAdminItem(field) {
 function addAdminProduct() {
     var container = document.getElementById('adminProducts');
     var idx = container.children.length;
-    container.innerHTML += '<div class="flex gap-2 items-start bg-white/5 rounded-xl p-3"><div class="flex-1 space-y-2"><input class="admin-input" value="" placeholder="产品名称" data-idx="'+idx+'" data-pfield="name"><input class="admin-input" value="" placeholder="描述" data-idx="'+idx+'" data-pfield="desc"><input class="admin-input" value="" placeholder="价格" data-idx="'+idx+'" data-pfield="price"></div><button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-300 text-xs px-2"><i class="ri-delete-bin-line"></i></button></div>';
+    container.innerHTML += '<div class="flex gap-2 items-start bg-white/5 rounded-xl p-3"><div class="flex-1 space-y-2"><input class="admin-input" value="" placeholder="产品名称" data-idx="'+idx+'" data-pfield="name"><input class="admin-input" value="" placeholder="描述" data-idx="'+idx+'" data-pfield="desc"></div><button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-300 text-xs px-2"><i class="ri-delete-bin-line"></i></button></div>';
 }
 
 function saveAdminConfig() {
@@ -503,7 +519,7 @@ function saveAdminConfig() {
     productDivs.forEach(function(div){
         var inputs = div.querySelectorAll('input');
         if (inputs[0] && inputs[0].value.trim()) {
-            products.push({ name: inputs[0].value.trim(), desc: inputs[1] ? inputs[1].value.trim() : '', price: inputs[2] ? inputs[2].value.trim() : '', img: 'ri-medicine-bottle-line' });
+            products.push({ name: inputs[0].value.trim(), desc: inputs[1] ? inputs[1].value.trim() : '', img: 'ri-medicine-bottle-line' });
         }
     });
 
